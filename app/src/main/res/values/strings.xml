@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BrandBlock</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_call_log">Nhật ký</string>
+    <string name="tab_filter">Bộ lọc</string>
+    <string name="tab_brand">Thương hiệu</string>
+    <string name="tab_stats">Thống kê</string>
+    <string name="tab_settings">Cài đặt</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title_1">Chặn SPAM Theo Thương Hiệu</string>
+
+    <!-- Call Log Screen -->
+    <string name="call_log_title">Nhật ký cuộc gọi</string>
+    <string name="search_hint">Tìm kiếm…</string>
+    <string name="missed_call_prefix">Nháy máy %1$d giây</string>
+    <string name="mobile_label">Di động</string>
+    <string name="yesterday_label">Hôm qua</string>
+
+    <!-- Modal Bottom Sheet -->
+    <string name="add_to_block_list">Thêm vào danh sách chặn</string>
+    <string name="selected_phone_number">Số điện thoại: %1$s</string>
+    <string name="select_brand_prompt">Chọn thương hiệu có sẵn hoặc tạo thương hiệu mới trước:</string>
+    <string name="no_brand_yet">Chưa có thương hiệu nào</string>
+    <string name="btn_create_new_brand">+ Tạo Thương hiệu mới</string>
+    <string name="btn_cancel">Hủy</string>
+    <string name="btn_block_now">Chặn ngay</string>
+
+    <!-- Add / Edit Brand Screen -->
+    <string name="title_create_brand">Tạo Thương hiệu Chặn mới</string>
+    <string name="label_brand_name">Tên thương hiệu / Dịch vụ SPAM</string>
+    <string name="hint_brand_name">Tín dụng &amp; Vay tiêu dùng SPAM</string>
+    <string name="label_add_number">Thêm số điện thoại hoặc đầu số</string>
+    <string name="hint_add_number">Thêm số điện thoại</string>
+    <string name="btn_add_number">+ Thêm số</string>
+    <string name="brand_numbers_count">Danh sách số thuộc thương hiệu này (%1$d số)</string>
+    <string name="btn_save_brand">Lưu &amp; Kích hoạt chặn</string>
+
+    <!-- Brand List Screen -->
+    <string name="brand_list_title">Danh sách Thương hiệu Chặn</string>
+    <string name="search_brand_hint">Tìm thương hiệu hoặc số điện thoại…</string>
+    <string name="btn_create_brand">+ Tạo Thương hiệu</string>
+    <string name="brand_sub_info">%1$d số điện thoại • Đã chặn %2$d lần</string>
+
+    <!-- Statistics & History -->
+    <string name="stats_title">Thống kê &amp; Lịch sử chặn</string>
+    <string name="total_blocked">Tổng cuộc gọi đã chặn</string>
+    <string name="most_blocked_brand">Thương hiệu quấy rối nhiều nhất</string>
+    <string name="blocked_log_item">%1$s - Chặn ngầm (%2$s)</string>
+</resources>

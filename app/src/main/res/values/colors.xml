@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Pixel Material You Palette (Light Blue & Cyan Tones) -->
+    <color name="pixel_blue_bg">#E8F0FE</color>
+    <color name="pixel_blue_surface">#F2F6FC</color>
+    <color name="pixel_card_bg">#FFFFFF</color>
+    <color name="pixel_card_light_blue">#E3EDFB</color>
+    <color name="pixel_chip_bg">#D7E3F8</color>
+    <color name="pixel_chip_text">#1B314F</color>
+
+    <!-- Primary & Accent Colors -->
+    <color name="primary">#2B5EA7</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_container">#D8E2FF</color>
+    <color name="on_primary_container">#001A41</color>
+
+    <color name="secondary_teal">#5DBBD0</color>
+    <color name="button_teal">#8BD5E5</color>
+    <color name="button_dark_action">#3D5A6C</color>
+
+    <!-- Status & Alerts -->
+    <color name="spam_red">#B3261E</color>
+    <color name="spam_red_bg">#FCE8E6</color>
+    <color name="missed_call_red">#C0392B</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#1A1C1E</color>
+    <color name="text_secondary">#43474E</color>
+    <color name="text_muted">#73777F</color>
+
+    <!-- Navigation & Shapes -->
+    <color name="nav_selected_bg">#C2E7FF</color>
+    <color name="nav_icon_selected">#001D35</color>
+    <color name="nav_icon_unselected">#444746</color>
+</resources>
