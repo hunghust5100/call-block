@@ -56,7 +56,7 @@ public class BrandCallScreeningService extends CallScreeningService {
                 // Show custom Push Notification
                 NotificationHelper.showBlockedNotification(
                         BrandCallScreeningService.this,
-                        brandName != null ? brandName : "Thương hiệu SPAM",
+                        brandName != null ? brandName : "Danh sách SPAM",
                         rawPhoneNumber
                 );
             } else {

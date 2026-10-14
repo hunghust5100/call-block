@@ -2,10 +2,14 @@ package com.example.callblock.data.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "blocked_logs")
 public class BlockedLog {
+
+    public static final String TYPE_CALL = "CALL";
+    public static final String TYPE_SMS = "SMS";
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -25,12 +29,21 @@ public class BlockedLog {
     @ColumnInfo(name = "matched_pattern")
     private String matchedPattern;
 
-    public BlockedLog(long brandId, String brandName, String phoneNumber, long blockedAt, String matchedPattern) {
+    @ColumnInfo(name = "log_type", defaultValue = "'CALL'")
+    private String logType = TYPE_CALL;
+
+    public BlockedLog(long brandId, String brandName, String phoneNumber, long blockedAt, String matchedPattern, String logType) {
         this.brandId = brandId;
         this.brandName = brandName;
         this.phoneNumber = phoneNumber;
         this.blockedAt = blockedAt;
         this.matchedPattern = matchedPattern;
+        this.logType = logType != null ? logType : TYPE_CALL;
+    }
+
+    @Ignore
+    public BlockedLog(long brandId, String brandName, String phoneNumber, long blockedAt, String matchedPattern) {
+        this(brandId, brandName, phoneNumber, blockedAt, matchedPattern, TYPE_CALL);
     }
 
     public long getId() {
@@ -79,5 +92,13 @@ public class BlockedLog {
 
     public void setMatchedPattern(String matchedPattern) {
         this.matchedPattern = matchedPattern;
+    }
+
+    public String getLogType() {
+        return logType;
+    }
+
+    public void setLogType(String logType) {
+        this.logType = logType;
     }
 }

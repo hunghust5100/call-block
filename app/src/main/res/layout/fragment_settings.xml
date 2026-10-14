@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/tab_settings"
         android:textColor="@color/text_primary"
         android:textSize="28sp"
@@ -97,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Hoạt động 100% Offline, bảo vệ quyền riêng tư tuyệt đối. Tự động từ chối ngầm dưới 50ms theo đúng tiêu chuẩn Android Native Java."
+                android:text="Hoạt động 100% Offline, bảo vệ quyền riêng tư tuyệt đối."
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -109,7 +109,7 @@
         android:layout_height="52dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/button_teal"
-        android:text="Cấp lại vai trò Chặn cuộc gọi"
+        android:text="Cấp lại quyền"
         android:textColor="@color/text_primary"
         android:textSize="16sp"
         android:textStyle="bold"

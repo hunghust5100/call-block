@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 
 @Database(
     entities = {Brand.class, BlockedNumber.class, BlockedLog.class},
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
@@ -44,6 +44,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase.class,
                             DB_NAME
                     )
+                    .fallbackToDestructiveMigration()
                     .addCallback(sRoomDatabaseCallback)
                     .build();
                 }

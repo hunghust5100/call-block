@@ -34,12 +34,24 @@ public class BlockRepository {
         return brandDao.getAllBrandsWithNumbers();
     }
 
+    public LiveData<BrandWithNumbers> getBrandWithNumbersById(long id) {
+        return brandDao.getBrandWithNumbersById(id);
+    }
+
     public LiveData<List<BlockedLog>> getAllBlockedLogs() {
         return blockedLogDao.getAllLogs();
     }
 
     public LiveData<Integer> getTotalBlockedCount() {
         return blockedLogDao.getTotalBlockedCount();
+    }
+
+    public LiveData<Integer> getTotalBlockedCallsCount() {
+        return blockedLogDao.getTotalBlockedCallsCount();
+    }
+
+    public LiveData<Integer> getTotalBlockedSmsCount() {
+        return blockedLogDao.getTotalBlockedSmsCount();
     }
 
     public LiveData<String> getMostBlockedBrandName() {
@@ -68,6 +80,54 @@ public class BlockRepository {
                 blockedNumberDao.insertAll(numbers);
             }
 
+            if (onComplete != null) {
+                onComplete.run();
+            }
+        });
+    }
+
+    public void updateBrandWithNumbers(long brandId, String name, String description, List<String> patterns, Runnable onComplete) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            Brand existing = brandDao.getBrandByIdSync(brandId);
+            if (existing != null) {
+                existing.setName(name);
+                existing.setDescription(description);
+                brandDao.update(existing);
+
+                // Delete existing numbers and insert updated numbers
+                blockedNumberDao.deleteByBrandId(brandId);
+
+                long now = System.currentTimeMillis();
+                List<BlockedNumber> numbers = new ArrayList<>();
+                for (String rawPattern : patterns) {
+                    String normalizedPattern = PhoneNumberUtils.normalize(rawPattern);
+                    if (normalizedPattern.isEmpty()) continue;
+
+                    String matchType = PhoneNumberUtils.isPrefixPattern(rawPattern)
+                            ? BlockedNumber.MATCH_PREFIX
+                            : BlockedNumber.MATCH_EXACT;
+
+                    numbers.add(new BlockedNumber(brandId, normalizedPattern, matchType, now));
+                }
+
+                if (!numbers.isEmpty()) {
+                    blockedNumberDao.insertAll(numbers);
+                }
+            }
+
+            if (onComplete != null) {
+                onComplete.run();
+            }
+        });
+    }
+
+    public void deleteBrandById(long brandId, Runnable onComplete) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            Brand existing = brandDao.getBrandByIdSync(brandId);
+            if (existing != null) {
+                brandDao.delete(existing);
+                blockedNumberDao.deleteByBrandId(brandId);
+            }
             if (onComplete != null) {
                 onComplete.run();
             }
@@ -119,7 +179,8 @@ public class BlockRepository {
                             brandWithNumbers.brand.getName(),
                             normalizedIncoming,
                             now,
-                            number.getNumberPattern()
+                            number.getNumberPattern(),
+                            BlockedLog.TYPE_CALL
                     );
                     blockedLogDao.insert(log);
 

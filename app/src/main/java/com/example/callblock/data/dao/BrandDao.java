@@ -34,6 +34,10 @@ public interface BrandDao {
     LiveData<List<BrandWithNumbers>> getAllBrandsWithNumbers();
 
     @Transaction
+    @Query("SELECT * FROM brands WHERE id = :id LIMIT 1")
+    LiveData<BrandWithNumbers> getBrandWithNumbersById(long id);
+
+    @Transaction
     @Query("SELECT * FROM brands WHERE is_enabled = 1")
     List<BrandWithNumbers> getEnabledBrandsWithNumbersSync();
 

@@ -21,11 +21,17 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
         void onToggle(BrandWithNumbers brandWithNumbers, boolean isEnabled);
     }
 
+    public interface OnBrandClickListener {
+        void onBrandClick(BrandWithNumbers brandWithNumbers);
+    }
+
     private List<BrandWithNumbers> items = new ArrayList<>();
     private final OnBrandToggleListener toggleListener;
+    private final OnBrandClickListener clickListener;
 
-    public BrandAdapter(OnBrandToggleListener toggleListener) {
+    public BrandAdapter(OnBrandToggleListener toggleListener, OnBrandClickListener clickListener) {
         this.toggleListener = toggleListener;
+        this.clickListener = clickListener;
     }
 
     public void setItems(List<BrandWithNumbers> newItems) {
@@ -47,7 +53,8 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
         holder.tvBrandName.setText(item.brand.getName());
 
         int numCount = item.numbers != null ? item.numbers.size() : 0;
-        String subText = numCount + " số điện thoại • Đã kích hoạt";
+        String statusText = item.brand.isEnabled() ? "Đã kích hoạt" : "Tắt";
+        String subText = numCount + " số điện thoại • " + statusText;
         holder.tvBrandSub.setText(subText);
 
         holder.switchEnabled.setOnCheckedChangeListener(null);
@@ -56,6 +63,12 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
         holder.switchEnabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (toggleListener != null) {
                 toggleListener.onToggle(item, isChecked);
+            }
+        });
+
+        holder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onBrandClick(item);
             }
         });
     }

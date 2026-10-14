@@ -124,7 +124,7 @@ public class QuickBlockBottomSheetDialogFragment extends BottomSheetDialogFragme
 
     private void performBlock() {
         if (selectedBrandId == -1) {
-            Toast.makeText(requireContext(), "Vui lòng chọn hoặc tạo thương hiệu trước!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Vui lòng chọn hoặc tạo danh sách chặn trước!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -144,7 +144,7 @@ public class QuickBlockBottomSheetDialogFragment extends BottomSheetDialogFragme
                     Collections.singletonList(norm),
                     null
             );
-            Toast.makeText(requireContext(), "Đã thêm " + norm + " vào thương hiệu " + targetBrand.brand.getName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Đã thêm " + norm + " vào danh sách " + targetBrand.brand.getName(), Toast.LENGTH_SHORT).show();
             dismiss();
         }
     }

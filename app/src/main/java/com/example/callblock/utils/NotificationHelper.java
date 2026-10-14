@@ -17,7 +17,7 @@ public class NotificationHelper {
 
     public static final String CHANNEL_ID = "brand_block_channel";
     private static final String CHANNEL_NAME = "Thống kê & Chặn SPAM";
-    private static final String CHANNEL_DESC = "Thông báo khi hệ thống tự động chặn cuộc gọi quấy rối theo thương hiệu";
+    private static final String CHANNEL_DESC = "Thông báo khi hệ thống tự động chặn cuộc gọi quấy rối theo danh sách";
 
     public static void createNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -48,7 +48,7 @@ public class NotificationHelper {
 
         String displayPhone = PhoneNumberUtils.formatDisplay(phoneNumber);
         String title = "Đã tự động chặn cuộc gọi SPAM";
-        String content = "Thương hiệu: " + brandName + " (Số: " + displayPhone + "). Cuộc gọi đã bị ngắt ngầm không đổ chuông.";
+        String content = "Danh sách: " + brandName + " (Số: " + displayPhone + "). Cuộc gọi đã bị ngắt ngầm không đổ chuông.";
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)

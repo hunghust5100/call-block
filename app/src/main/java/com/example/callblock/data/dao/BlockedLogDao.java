@@ -22,6 +22,12 @@ public interface BlockedLogDao {
     @Query("SELECT COUNT(*) FROM blocked_logs")
     LiveData<Integer> getTotalBlockedCount();
 
+    @Query("SELECT COUNT(*) FROM blocked_logs WHERE log_type = 'CALL'")
+    LiveData<Integer> getTotalBlockedCallsCount();
+
+    @Query("SELECT COUNT(*) FROM blocked_logs WHERE log_type = 'SMS'")
+    LiveData<Integer> getTotalBlockedSmsCount();
+
     @Query("SELECT COUNT(*) FROM blocked_logs WHERE brand_id = :brandId")
     LiveData<Integer> getBlockedCountByBrand(long brandId);
 

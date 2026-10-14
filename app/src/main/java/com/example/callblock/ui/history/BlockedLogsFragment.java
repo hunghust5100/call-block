@@ -45,9 +45,14 @@ public class BlockedLogsFragment extends Fragment {
         binding.rvBlockedLogs.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvBlockedLogs.setAdapter(adapter);
 
-        repository.getTotalBlockedCount().observe(getViewLifecycleOwner(), count -> {
-            int total = count != null ? count : 0;
-            binding.tvTotalBlocked.setText(String.valueOf(total));
+        repository.getTotalBlockedCallsCount().observe(getViewLifecycleOwner(), count -> {
+            int totalCalls = count != null ? count : 0;
+            binding.tvTotalCalls.setText(String.valueOf(totalCalls));
+        });
+
+        repository.getTotalBlockedSmsCount().observe(getViewLifecycleOwner(), count -> {
+            int totalSms = count != null ? count : 0;
+            binding.tvTotalSms.setText(String.valueOf(totalSms));
         });
 
         repository.getMostBlockedBrandName().observe(getViewLifecycleOwner(), name -> {
@@ -62,12 +67,12 @@ public class BlockedLogsFragment extends Fragment {
             if (logs != null && !logs.isEmpty()) {
                 adapter.setLogs(logs);
             } else {
-                // Populate mock history from BA design if empty
+                // Populate sample history for testing/preview if empty
                 List<BlockedLog> mockLogs = new ArrayList<>();
                 long now = System.currentTimeMillis();
-                mockLogs.add(new BlockedLog(1, "Bất động sản Quảng cáo", "02473008899", now - 60000, "02473008899"));
-                mockLogs.add(new BlockedLog(2, "Tín dụng & Vay tiêu dùng SPAM", "19006611", now - 3600000, "190066"));
-                mockLogs.add(new BlockedLog(3, "Chứng khoán Quốc tế", "02871000000", now - 86400000, "0287100"));
+                mockLogs.add(new BlockedLog(1, "Bất động sản Quảng cáo", "02473008899", now - 60000, "02473008899", BlockedLog.TYPE_CALL));
+                mockLogs.add(new BlockedLog(2, "Tín dụng & Vay tiêu dùng SPAM", "19006611", now - 3600000, "190066", BlockedLog.TYPE_SMS));
+                mockLogs.add(new BlockedLog(3, "Chứng khoán Quốc tế", "02871000000", now - 86400000, "0287100", BlockedLog.TYPE_CALL));
                 adapter.setLogs(mockLogs);
             }
         });
@@ -94,7 +99,8 @@ public class BlockedLogsFragment extends Fragment {
             BlockedLog log = logs.get(position);
             holder.tvBrandName.setText(log.getBrandName());
 
-            String detail = "Chặn ngầm • " + PhoneNumberUtils.formatDisplay(log.getPhoneNumber());
+            String typeStr = BlockedLog.TYPE_SMS.equals(log.getLogType()) ? "Tin nhắn" : "Cuộc gọi";
+            String detail = "Chặn ngầm (" + typeStr + ") • " + PhoneNumberUtils.formatDisplay(log.getPhoneNumber());
             holder.tvLogDetail.setText(detail);
 
             String timeStr = DateFormat.format("HH:mm", log.getBlockedAt()).toString();

@@ -1,5 +1,7 @@
 package com.example.callblock.ui.main;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import com.example.callblock.databinding.ActivityMainBinding;
 import com.example.callblock.ui.brand.BrandListFragment;
 import com.example.callblock.ui.calllog.CallLogFragment;
 import com.example.callblock.ui.history.BlockedLogsFragment;
+import com.example.callblock.ui.onboarding.OnboardingActivity;
 import com.example.callblock.ui.settings.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +22,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Check if onboarding needs to be shown on first app launch
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        boolean onboardingShown = prefs.getBoolean("onboarding_shown", false);
+        if (!onboardingShown) {
+            Intent intent = new Intent(this, OnboardingActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

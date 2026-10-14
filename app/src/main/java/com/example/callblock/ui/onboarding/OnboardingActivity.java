@@ -3,6 +3,7 @@ package com.example.callblock.ui.onboarding;
 import android.Manifest;
 import android.app.role.RoleManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -59,7 +60,7 @@ public class OnboardingActivity extends AppCompatActivity {
 
     private void setupViewPager() {
         List<SlideItem> slides = new ArrayList<>();
-        slides.add(new SlideItem("Chặn SPAM Theo Thương Hiệu", "Gom nhóm nhiều số điện thoại quảng cáo vào một thương hiệu để chặn tự động"));
+        slides.add(new SlideItem("Chặn SPAM Theo Danh Sách", "Gom nhóm nhiều số điện thoại quảng cáo vào danh sách chặn để tự động từ chối"));
         slides.add(new SlideItem("Nhận diện Cuộc gọi Quấy rỗi", "Tự động phát hiện nháy máy, số lạ và chặn ngầm dưới 50ms không làm phiền"));
         slides.add(new SlideItem("Bảo vệ Quyền riêng tư 100%", "Dữ liệu lưu trữ hoàn toàn Offline trên thiết bị của bạn, an toàn tuyệt đối"));
 
@@ -125,6 +126,9 @@ public class OnboardingActivity extends AppCompatActivity {
     }
 
     private void navigateToMain() {
+        SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        prefs.edit().putBoolean("onboarding_shown", true).apply();
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
